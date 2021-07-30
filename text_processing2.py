@@ -30,7 +30,7 @@ def digits_to_words(input_string):
     """
 
     def num_to_char(number): # 숫자를 문자로 변환하는 함수
-        char_list=["zero", "one", "two", "three", "foue", "five", "six", "seven", "eight", "nine"]
+        char_list=["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
         x = number
         char_for_num =" "
         
@@ -122,24 +122,26 @@ def to_camel_case(underscore_str):
     """
     camelcase_str = underscore_str
 
-    camelcase_str = camelcase_str.lower()
-    camelcase_str = camelcase_str.replace("_", " ")
-    camelcase_str = camelcase_str.split()
+    if "_" in camelcase_str:
+        camelcase_str = camelcase_str.lower()
+        camelcase_str = camelcase_str.replace("_", " ")
+        camelcase_str = camelcase_str.split()
+    
+        # 리스트로 변환된 문자열의 첫 글자를 대문자로 변환하기
+        for i in range(len(camelcase_str)):
+            if i > 0:
+                camelcase_str[i] = camelcase_str[i].capitalize()
 
-    # 리스트로 변환된 문자열의 첫 글자를 대문자로 변환하기
-    for i in range(len(camelcase_str)):
-        if i > 0:
-            camelcase_str[i] = camelcase_str[i].capitalize()
+        camelcase_str="".join(camelcase_str)
 
-    camelcase_str="".join(camelcase_str)
 
     print(camelcase_str)
 
     return camelcase_str
-'''
+
 test_str = "My number: 010-1234-5678"
-test_str2 = "not_Camel_Yet"
+test_str2 = "notCamelYet"
 
 digits_to_words(test_str)
 to_camel_case(test_str2)
-'''
+
