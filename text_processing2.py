@@ -28,7 +28,63 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+
+    def num_to_char(number): # 숫자를 문자로 변환하는 함수
+        char_list=["zero", "one", "two", "three", "foue", "five", "six", "seven", "eight", "nine"]
+        x = number
+        char_for_num =" "
+        
+        if x == 0:
+            char_for_num = char_list[0]
+        elif x == 1:
+            char_for_num = char_list[1]
+        elif x == 2:
+            char_for_num = char_list[2]
+        elif x == 3:
+            char_for_num = char_list[3]
+        elif x == 4:
+            char_for_num = char_list[4]
+        elif x == 5:
+            char_for_num = char_list[5]
+        elif x == 6:
+            char_for_num = char_list[6]
+        elif x == 7:
+            char_for_num = char_list[7]
+        elif x == 8:
+            char_for_num = char_list[8]
+        elif x == 9:
+            char_for_num = char_list[9]
+            
+        return char_for_num
+
+    def eliminate_sign(input_string):
+        sign_list= ["'", '"', ',', '.', '?', '!', ':', ';', '(',')','-']
+
+        temp = input_string
+
+        for i in sign_list:
+            if i in temp:
+                temp = temp.replace(i, "")
+        return temp
+
+    # 문자열을 소문자로 처리하기
+    input_string = input_string.lower()
+
+    # 문장 부호 제거하기
+
+    input_string = eliminate_sign(input_string)
+
+    digit_string = []
+
+    for str in input_string:
+        if str.isdigit():
+            for i in str:
+                digit_string.append(num_to_char(int(i)))
+        else:
+            continue
+    
+    digit_string=" ".join(digit_string)
+    print(digit_string)   
     return digit_string
 
 
@@ -64,5 +120,26 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    camelcase_str = underscore_str
+
+    camelcase_str = camelcase_str.lower()
+    camelcase_str = camelcase_str.replace("_", " ")
+    camelcase_str = camelcase_str.split()
+
+    # 리스트로 변환된 문자열의 첫 글자를 대문자로 변환하기
+    for i in range(len(camelcase_str)):
+        if i > 0:
+            camelcase_str[i] = camelcase_str[i].capitalize()
+
+    camelcase_str="".join(camelcase_str)
+
+    print(camelcase_str)
+
     return camelcase_str
+'''
+test_str = "My number: 010-1234-5678"
+test_str2 = "not_Camel_Yet"
+
+digits_to_words(test_str)
+to_camel_case(test_str2)
+'''
